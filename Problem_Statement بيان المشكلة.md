@@ -1,11 +1,5 @@
 # بيان المشكلة المعتمد | Approved Problem Statement
 
-> **ملاحظة مهمة | Important Note**  
-> هذا الملف مبني فقط على المستندات المرفقة. لا يتضمن أي أرقام أو نتائج غير موجودة فيها.
-
----
-
-# العربية
 
 ## 1. بيان المشكلة
 يختار بعض الشباب التخصصات والمسارات المهنية دون فهم كافٍ لطبيعة الوظائف ومتطلباتها الواقعية، مما قد يؤدي إلى قرارات مهنية غير مناسبة.
@@ -105,7 +99,7 @@
 
 ---
 
-# English
+
 
 ## 1. Problem Statement
 Some young people choose academic majors and career paths without sufficient understanding of the real nature of jobs and their practical requirements, which may lead to unsuitable career decisions.
