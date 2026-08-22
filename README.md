@@ -113,6 +113,8 @@ career_twin/
 ---
 ---
 
+Source Code---->https://drive.google.com/file/d/19k3RN7NZtkCieHIIM5dfMyknNgkIItUq/view?usp=sharing
+
 # توأمك المهني — CareerTwin AI (Streamlit)
 
 تمثل هذه النسخة نموذج العمل الأولي (MVP) الذي يشمل ويُعالج كافة عمليات المنصة من التهيئة إلى التقييم النهائي. منصّة استكشاف مهني تضعك داخل **يوم عمل افتراضي** في الوظيفة التي تفكّر بها:
