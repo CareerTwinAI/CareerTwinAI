@@ -2,3 +2,4 @@ streamlit>=1.49
 plotly>=5.20
 python-dotenv>=1.0
 openai>=1.30
+tornado>=6.4
