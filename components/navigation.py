@@ -69,12 +69,13 @@ def render_navigation(lang: str) -> None:
 }}
 .stButton button, .stButton button * {{ direction: {direction} !important; }}
 
-/* logout: top-left beside language controls */
+/* Logout sits on the same horizontal line as the language controls,
+   with enough width for the full Arabic label. */
 .st-key-nav_logout {{
     position: fixed !important;
-    top: 28px !important;
-    left: max(24px, calc((100vw - 1080px) / 2)) !important;
-    width: 125px !important;
+    top: 50px !important;
+    left: max(20px, calc((100vw - 1080px) / 2 - 90px)) !important;
+    width: 150px !important;
     z-index: 1000 !important;
 }}
 .st-key-nav_logout button {{
@@ -84,10 +85,21 @@ def render_navigation(lang: str) -> None:
     background: #FFFFFF !important;
     border-radius: 12px !important;
     box-shadow: 0 1px 2px rgba(11,27,51,.05) !important;
+    padding-inline: 12px !important;
 }}
-.st-key-nav_logout button p {{ color: #33456A !important; font-weight: 700 !important; }}
+.st-key-nav_logout button p {{
+    color: #33456A !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}}
 @media (max-width: 900px) {{
-    .st-key-nav_logout {{ top: 20px !important; left: 12px !important; width: 105px !important; }}
+    .st-key-nav_logout {{
+        top: 44px !important;
+        left: 12px !important;
+        width: 132px !important;
+    }}
 }}
 </style>
 """,
