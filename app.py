@@ -74,7 +74,7 @@ AR_ERRORS = {
 # always run inside the platform). GAME_INTRO_URL in .env remains a generic
 # fallback for any position without a dedicated game.
 POSITION_GAME_URLS = {
-    "soc": "https://careertwinai.streamlit.app/app/static/tesana/index.html",
+    "soc": "https://tesana.netlify.app/",
 }
 
 
