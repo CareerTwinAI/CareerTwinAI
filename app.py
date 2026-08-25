@@ -1,5 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-"""ØªÙˆØ£Ù…Ùƒ Ø§Ù„Ù…Ù‡Ù†ÙŠ â€” CareerTwin AI (Streamlit edition).
+# -*- coding: utf-8 -*-
+"""توأمك المهني — CareerTwin AI (Streamlit edition).
 
 Run locally with:
     python -m streamlit run app.py
@@ -61,20 +61,20 @@ def _logo_b64(path_str: str) -> str:
     return ""
 
 AR_ERRORS = {
-    "no_data": "ØªØ¹Ø°Ù‘Ø± ØªØ­Ù…ÙŠÙ„ Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„ÙˆØ¸Ø§Ø¦Ù. ØªØ£ÙƒØ¯ Ù…Ù† ÙˆØ¬ÙˆØ¯ Ø§Ù„Ù…Ù„Ù data/careers.json Ø«Ù… Ø£Ø¹Ø¯ ØªØ´ØºÙŠÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚.",
-    "bad_field": "Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ù‡Ø°Ø§ Ø§Ù„Ù…Ø¬Ø§Ù„. Ø¹Ø¯ Ø¥Ù„Ù‰ Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ù…Ø¬Ø§Ù„Ø§Øª ÙˆØ§Ø®ØªØ± Ù…Ù† Ø¬Ø¯ÙŠØ¯.",
-    "bad_position": "Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ù‡Ø°Ù‡ Ø§Ù„ÙˆØ¸ÙŠÙØ©. Ø¹Ø¯ Ø¥Ù„Ù‰ Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„ÙˆØ¸Ø§Ø¦Ù ÙˆØ§Ø®ØªØ± Ù…Ù† Ø¬Ø¯ÙŠØ¯.",
-    "bad_scenario": "ØªØ¹Ø°Ù‘Ø± ØªØ¬Ù‡ÙŠØ² Ù‡Ø°Ø§ Ø§Ù„Ù…ÙˆÙ‚Ù. Ø£Ø¹Ø¯ Ø¨Ø¯Ø¡ Ø§Ù„ÙŠÙˆÙ… Ù…Ù† ØµÙØ­Ø© Ø§Ù„ÙˆØ¸ÙŠÙØ©.",
-    "empty": "Ø§ÙƒØªØ¨ Ù‚Ø±Ø§Ø±Ùƒ Ø£Ùˆ Ø§Ø®ØªØ± Ø£Ø­Ø¯ Ø§Ù„Ø§Ù‚ØªØ±Ø§Ø­Ø§Øª Ù„Ù„Ù…ØªØ§Ø¨Ø¹Ø©.",
+    "no_data": "تعذّر تحميل بيانات الوظائف. تأكد من وجود الملف data/careers.json ثم أعد تشغيل التطبيق.",
+    "bad_field": "لم يتم العثور على هذا المجال. عد إلى قائمة المجالات واختر من جديد.",
+    "bad_position": "لم يتم العثور على هذه الوظيفة. عد إلى قائمة الوظائف واختر من جديد.",
+    "bad_scenario": "تعذّر تجهيز هذا الموقف. أعد بدء اليوم من صفحة الوظيفة.",
+    "empty": "اكتب قرارك أو اختر أحد الاقتراحات للمتابعة.",
 }
 
 
 # Published mini-games connected to specific positions (cosmetic openers on
-# the position page â€” the interactive 3-mission simulation and all scoring
+# the position page — the interactive 3-mission simulation and all scoring
 # always run inside the platform). GAME_INTRO_URL in .env remains a generic
 # fallback for any position without a dedicated game.
 POSITION_GAME_URLS = {
-    "soc": "/app/static/tesana/index.html",
+    "soc": "https://careertwinai.streamlit.app/app/static/tesana/index.html",
 }
 
 
@@ -154,7 +154,7 @@ def _dashboard_breadcrumb(lang: str) -> None:
     """Show a subtle back-to-dashboard link for onboarded users in journey pages."""
     if not st.session_state.get("onboarding_complete"):
         return
-    label = "â† Ù„ÙˆØ­ØªÙŠ" if lang == "ar" else "â† My Dashboard"
+    label = "← لوحتي" if lang == "ar" else "← My Dashboard"
 
     def _go_dash():
         st.session_state.current_page = "dashboard"
@@ -292,12 +292,12 @@ def generate_final_report() -> None:
 # ------------------------------------------------------------------ #
 
 def resolve_app_mode() -> None:
-    """Automatic backend mode selection â€” never exposed in the UI.
+    """Automatic backend mode selection — never exposed in the UI.
 
     Live AI is used whenever a valid API configuration exists; otherwise the
     prepared Demo scenarios run. For development/testing only, the mode can
     be forced through the CAREERTWIN_FORCE_MODE environment variable
-    ("live" or "demo") â€” nothing is ever shown to users."""
+    ("live" or "demo") — nothing is ever shown to users."""
     override = (os.getenv("CAREERTWIN_FORCE_MODE") or "").strip().lower()
     if override in ("live", "demo"):
         st.session_state.app_mode = override
@@ -312,18 +312,18 @@ def header(ui: dict) -> None:
 
     badge = ""
     if live:
-        badge_text = "Ø§Ù„Ù…Ø­Ø§ÙƒØ§Ø© Ø§Ù„Ø°ÙƒÙŠØ© Ù…ÙØ¹Ù‘Ù„Ø©" if lang == "ar" else "Smart simulation enabled"
+        badge_text = "المحاكاة الذكية مفعّلة" if lang == "ar" else "Smart simulation enabled"
         badge = f"<span class='ct-status'><span class='ct-status-dot'></span>{badge_text}</span>"
 
     mark_b64 = _logo_b64(str(LOGO_MARK_PATH))
     brand_visual = (
-        f"<img class='ct-header-mark' src='data:image/png;base64,{mark_b64}' alt='ØªÙˆØ£Ù…Ùƒ Ø§Ù„Ù…Ù‡Ù†ÙŠ'/>"
+        f"<img class='ct-header-mark' src='data:image/png;base64,{mark_b64}' alt='توأمك المهني'/>"
         if mark_b64
-        else "<div class='ct-header-mark-fallback'>Øª</div>"
+        else "<div class='ct-header-mark-fallback'>ت</div>"
     )
 
-    # â”€â”€ layout: brand | badge | [home] | lang-AR | lang-EN â”€â”€
-    # Wider columns so buttons always have room â€” fixes vertical text root cause
+    # ── layout: brand | badge | [home] | lang-AR | lang-EN ──
+    # Wider columns so buttons always have room — fixes vertical text root cause
     c1, c2, c3, c_ar, c_en = st.columns([3.8, 2.0, 1.4, 1.1, 1.1], vertical_alignment="center")
 
     with c1:
@@ -346,18 +346,18 @@ def header(ui: dict) -> None:
                 st.session_state.current_page = home_target
                 st.session_state.current_nav  = "dashboard"
             st.button(
-                "Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©" if lang == "ar" else "Home",
+                "الرئيسية" if lang == "ar" else "Home",
                 key="home_btn",
                 use_container_width=True,
                 on_click=_go_home,
             )
 
-    # Two language buttons â€” same size, always visible
+    # Two language buttons — same size, always visible
     ar_type = "primary" if lang == "ar" else "secondary"
     en_type = "primary" if lang == "en" else "secondary"
 
     with c_ar:
-        if st.button("Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©", key="lang_ar_btn", type=ar_type, use_container_width=True):
+        if st.button("العربية", key="lang_ar_btn", type=ar_type, use_container_width=True):
             st.session_state.language = "ar"
             st.rerun()
     with c_en:
@@ -508,12 +508,12 @@ def page_landing(data: dict, ui: dict, lang: str) -> None:
     logo_b64 = _logo_b64(str(LOGO_PATH))
     if logo_b64:
         # the platform name (Arabic + English) is part of the logo lockup,
-        # so it is not repeated as text â€” only the tagline is added
+        # so it is not repeated as text — only the tagline is added
         hero_brand = (f"<img class='ct-hero-logo' src='data:image/png;base64,{logo_b64}' "
-                      f"alt='ØªÙˆØ£Ù…Ùƒ Ø§Ù„Ù…Ù‡Ù†ÙŠ â€” CareerTwin AI'/>")
+                      f"alt='توأمك المهني — CareerTwin AI'/>")
     else:
         hero_brand = (f"<div class='ct-hero-logo-fallback'>"
-                      f"<div style='font-size:34px;font-weight:800'>ØªÙˆØ£Ù…Ùƒ Ø§Ù„Ù…Ù‡Ù†ÙŠ</div>"
+                      f"<div style='font-size:34px;font-weight:800'>توأمك المهني</div>"
                       f"<div style='font-size:19px;font-weight:700;color:{COLORS['turq']}'>CareerTwin AI</div>"
                       f"</div>")
     st.markdown(
@@ -552,14 +552,14 @@ def _collect_profile_answers(ui: dict) -> dict:
 
 
 def page_profile(data: dict, ui: dict, lang: str) -> None:
-    # NOTE: Do NOT inject max-width on .block-container â€” that globally
+    # NOTE: Do NOT inject max-width on .block-container — that globally
     # narrows the header columns and causes vertical button text.
     _dashboard_breadcrumb(lang)
 
     # restore previous answers into widget state (widget keys are dropped by
     # Streamlit when a page isn't rendered, so we seed them back explicitly).
     # After a language switch the stored label belongs to the other language,
-    # so remap it from the index-based answers â€” the source of truth.
+    # so remap it from the index-based answers — the source of truth.
     prev_answers = st.session_state.profile_answers or {}
     for i, q in enumerate(ui["q"]):
         key = f"profile_q{i}"
@@ -596,16 +596,16 @@ def page_profile(data: dict, ui: dict, lang: str) -> None:
             answered.append(i)
     n_done, n_total = len(answered), len(ui["q"])
 
-    helper = ("Ø¥Ø¬Ø§Ø¨Ø§ØªÙƒ ØªØ³Ø§Ø¹Ø¯Ù†Ø§ Ø¹Ù„Ù‰ Ø§Ù‚ØªØ±Ø§Ø­ Ø§Ù„Ù…Ø¬Ø§Ù„Ø§Øª Ø§Ù„Ù…Ù‡Ù†ÙŠØ© Ø§Ù„Ø£Ù†Ø³Ø¨ Ù„Ùƒ â€” ÙˆÙŠÙ…ÙƒÙ†Ùƒ Ø¯Ø§Ø¦Ù…Ø§Ù‹ Ø§Ø®ØªÙŠØ§Ø± Ø£ÙŠ Ù…Ø¬Ø§Ù„ Ø¢Ø®Ø±."
+    helper = ("إجاباتك تساعدنا على اقتراح المجالات المهنية الأنسب لك — ويمكنك دائماً اختيار أي مجال آخر."
               if lang == "ar" else
-              "Your answers help us suggest the career fields that fit you best â€” you can always pick any other field.")
-    step_label = (f"Ø£Ø¬Ø¨Øª Ø¹Ù„Ù‰ <b>{n_done}</b> Ù…Ù† {n_total} Ø£Ø³Ø¦Ù„Ø©"
+              "Your answers help us suggest the career fields that fit you best — you can always pick any other field.")
+    step_label = (f"أجبت على <b>{n_done}</b> من {n_total} أسئلة"
                   if lang == "ar" else f"<b>{n_done}</b> of {n_total} questions answered")
     segs = "".join(f"<div class='ct-seg{' on' if i < n_done else ''}'></div>"
                    for i in range(n_total))
     st.markdown(
         f"<div class='ct-hero'>"
-        f"<span class='ct-eyebrow'>{'Ø§Ù„Ø®Ø·ÙˆØ© Ø§Ù„Ø£ÙˆÙ„Ù‰' if lang == 'ar' else 'Step one'} Â· CareerTwin AI</span>"
+        f"<span class='ct-eyebrow'>{'الخطوة الأولى' if lang == 'ar' else 'Step one'} · CareerTwin AI</span>"
         f"<div class='ct-title' style='font-size:30px'>{ui['pTitle']}</div>"
         f"<p class='ct-lede' style='margin:4px 0 0;font-size:15.5px'>{ui['pSub']}</p>"
         f"<p class='ct-muted' style='margin:8px 0 0;font-size:13.5px'>{helper}</p>"
@@ -643,23 +643,23 @@ def page_profile(data: dict, ui: dict, lang: str) -> None:
         st.session_state.recommended_fields = []
         go_to_page("fields")
 
-    cta = (("Ø¹Ø±Ø¶ Ø§Ù„Ù…Ø¬Ø§Ù„Ø§Øª Ø§Ù„Ù…Ù‚ØªØ±Ø­Ø© â†" if lang == "ar" else "Show my suggested fields â†’")
+    cta = (("عرض المجالات المقترحة ←" if lang == "ar" else "Show my suggested fields →")
            if n_done > 0 else
-           (ui["next"] + (" â†" if lang == "ar" else " â†’")))
+           (ui["next"] + (" ←" if lang == "ar" else " →")))
     st.button(cta, type="primary", width="stretch", on_click=_next)
     c1, c2 = st.columns(2)
     with c1:
-        st.button("â†’ " + ui["back"] if lang == "ar" else "â† " + ui["back"],
+        st.button("→ " + ui["back"] if lang == "ar" else "← " + ui["back"],
                   type="tertiary", width="stretch", on_click=go_to_page, args=("landing",))
     with c2:
         st.button(ui["skip"], type="tertiary", width="stretch", on_click=_skip)
-    note = ("Ù„Ø§ ØªÙØ­ÙØ¸ Ø¥Ø¬Ø§Ø¨Ø§ØªÙƒ ÙÙŠ Ø£ÙŠ Ø­Ø³Ø§Ø¨ØŒ ÙˆØªÙØ³ØªØ®Ø¯Ù… ÙÙ‚Ø· Ù„Ø§Ù‚ØªØ±Ø§Ø­ Ø§Ù„Ù…Ø¬Ø§Ù„Ø§Øª."
-            if lang == "ar" else "Answers aren't stored to any account â€” they're only used to suggest fields.")
+    note = ("لا تُحفظ إجاباتك في أي حساب، وتُستخدم فقط لاقتراح المجالات."
+            if lang == "ar" else "Answers aren't stored to any account — they're only used to suggest fields.")
     st.markdown(f"<div class='ct-cta-note'>{note}</div>", unsafe_allow_html=True)
 
 
 def _field_card(f: dict, ui: dict, lang: str, recommended: bool) -> None:
-    rec_badge = (f"<span class='ct-eyebrow amber'>{'Ù…Ù‚ØªØ±Ø­ Ù„Ùƒ' if lang == 'ar' else 'Suggested for you'}</span>"
+    rec_badge = (f"<span class='ct-eyebrow amber'>{'مقترح لك' if lang == 'ar' else 'Suggested for you'}</span>"
                  if recommended else "")
     monogram = (f"<span class='ct-monogram' "
                 f"style='background:{f['tint']};color:{f['accent']}'>"
@@ -676,7 +676,7 @@ def _field_card(f: dict, ui: dict, lang: str, recommended: bool) -> None:
         f"</div>"
     )
     st.button(
-        "Ø¹ÙØ´ Ø§Ù„ØªØ¬Ø±Ø¨Ø©" if lang == "ar" else "Live the experience",
+        "عِش التجربة" if lang == "ar" else "Live the experience",
         key=f"fld_{f['id']}_{recommended}", type="primary", width="stretch",
         on_click=select_field, args=(f["id"],),
     )
@@ -711,7 +711,7 @@ def page_positions(data: dict, ui: dict, lang: str) -> None:
         return
     card(
         f"<div class='ct-accentbar' style='background:{f['accent']}'></div>"
-        f"<div class='ct-h2'>{ui['posTitle'] + ' ' + f['name'][lang] if lang == 'en' else ui['posTitle'] + ' â€” ' + f['name'][lang]}</div>"
+        f"<div class='ct-h2'>{ui['posTitle'] + ' ' + f['name'][lang] if lang == 'en' else ui['posTitle'] + ' — ' + f['name'][lang]}</div>"
         f"<p class='ct-muted'>{ui['posSub']}</p>",
         large=True,
     )
@@ -747,7 +747,7 @@ def page_position_intro(data: dict, ui: dict, lang: str) -> None:
         f"<div class='ct-accentbar' style='background:{f['accent']}'></div>"
         f"<span class='ct-eyebrow blue'>{ui['introTitle']}</span>"
         f"<div class='ct-title' style='font-size:28px'>{p['title'][lang]}</div>"
-        f"<div class='ct-muted'>{f['name'][lang]} Â· {p['title']['en'] if lang == 'ar' else p['title']['ar']}</div>"
+        f"<div class='ct-muted'>{f['name'][lang]} · {p['title']['en'] if lang == 'ar' else p['title']['ar']}</div>"
         f"<p class='ct-lede' style='margin-top:10px'>{p['desc'][lang]}</p>"
         f"<div class='ct-persona'>{ui['introPersona']}: <b>{p['persona'][lang]}</b></div>",
         large=True,
@@ -762,7 +762,7 @@ def page_position_intro(data: dict, ui: dict, lang: str) -> None:
 
     crit_rows = "".join(
         f"<div style='display:flex;justify-content:space-between;border-bottom:1px solid {COLORS['line']};padding:7px 0'>"
-        f"<span>{c[lang]}</span><b style='color:{COLORS['blue']}'>{round(c['w'] * 100)}Ùª</b></div>"
+        f"<span>{c[lang]}</span><b style='color:{COLORS['blue']}'>{round(c['w'] * 100)}٪</b></div>"
         for c in p["criteria"]
     )
     card(f"<div class='ct-h3'>{ui['introCrit']}</div>{crit_rows}"
@@ -770,32 +770,32 @@ def page_position_intro(data: dict, ui: dict, lang: str) -> None:
 
     # position-connected mini-game (e.g. the SOC Analyst game on Tesana):
     # shown prominently for mapped positions; GAME_INTRO_URL in .env stays
-    # a generic fallback in a collapsed expander. Purely cosmetic â€” the
+    # a generic fallback in a collapsed expander. Purely cosmetic — the
     # interactive 3-mission simulation and all scoring run in the platform.
     game_url = POSITION_GAME_URLS.get(p["id"], "")
     if game_url:
-        title = ("Ù„Ø¹Ø¨Ø© Ù…Ø­Ø§ÙƒØ§Ø© â€” Ø¹ÙØ´ Ø§Ù„ØªØ¬Ø±Ø¨Ø© Ø§Ù„ÙˆØ¸ÙŠÙÙŠØ© Ù‚Ø¨Ù„ Ø¨Ø¯Ø¡ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…!"
-                 if lang == "ar" else "Simulation Game â€” Live the job experience before the test!")
+        title = ("لعبة محاكاة — عِش التجربة الوظيفية قبل بدء التقييم!"
+                 if lang == "ar" else "Simulation Game — Live the job experience before the test!")
         card(f"<div class='ct-h3'>{title}</div>")
         components.iframe(game_url, height=600, scrolling=True)
     else:
         env_url = (os.getenv("GAME_INTRO_URL") or "").strip()
         if env_url.startswith("https://"):
-            with st.expander("Ù„Ø¹Ø¨Ø© Ù…Ø­Ø§ÙƒØ§Ø© â€” Ø¹ÙØ´ Ø§Ù„ØªØ¬Ø±Ø¨Ø© Ø§Ù„ÙˆØ¸ÙŠÙÙŠØ©" if lang == "ar" else "Simulation Game â€” Live the job experience"):
+            with st.expander("لعبة محاكاة — عِش التجربة الوظيفية" if lang == "ar" else "Simulation Game — Live the job experience"):
                 components.iframe(env_url, height=600, scrolling=True)
 
     c1, c2 = st.columns([1, 3])
     with c1:
         st.button(ui["prev"], on_click=go_to_page, args=("positions",))
     with c2:
-        st.button("Ø§Ø¨Ø¯Ø£ Ø§Ù„Ø±Ø­Ù„Ø©" if lang == "ar" else "Start the journey",
+        st.button("ابدأ الرحلة" if lang == "ar" else "Start the journey",
                   type="primary", width="stretch", on_click=start_simulation)
 
 
 def _quest_hud(p: dict, scenario: dict, step: int, lang: str) -> None:
     """Game HUD: role badge, virtual clock, and the 3-mission quest line."""
     done = step + (1 if st.session_state.awaiting_continue else 0)
-    labels = (["Ø§Ù„Ù…Ù‡Ù…Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰", "Ø§Ù„Ù…Ù‡Ù…Ø© Ø§Ù„Ø«Ø§Ù†ÙŠØ©", "Ø§Ù„Ù…Ù‡Ù…Ø© Ø§Ù„Ø£Ø®ÙŠØ±Ø©"] if lang == "ar"
+    labels = (["المهمة الأولى", "المهمة الثانية", "المهمة الأخيرة"] if lang == "ar"
               else ["Mission 1", "Mission 2", "Final mission"])
     nodes = []
     for i in range(3):
@@ -806,7 +806,7 @@ def _quest_hud(p: dict, scenario: dict, step: int, lang: str) -> None:
             f"<div class='ct-qlabel'>{labels[i]}</div></div>")
         if i < 2:
             nodes.append(f"<div class='ct-qlink{' done' if i < done else ''}'></div>")
-    role_small = "ÙŠÙˆÙ…Ùƒ Ø§Ù„Ø§ÙØªØ±Ø§Ø¶ÙŠ ÙÙŠ Ù‡Ø°Ù‡ Ø§Ù„ÙˆØ¸ÙŠÙØ©" if lang == "ar" else "Your virtual workday in this role"
+    role_small = "يومك الافتراضي في هذه الوظيفة" if lang == "ar" else "Your virtual workday in this role"
     st.markdown(
         f"<div class='ct-hud'>"
         f"<div class='ct-hud-top'>"
@@ -850,14 +850,14 @@ def page_simulation(data: dict, ui: dict, lang: str) -> None:
     _quest_hud(p, scenario, step, lang)
 
     persona = p["persona"][lang]
-    coach_name = "Ù…Ø¯Ø±Ø¨Ùƒ Ø§Ù„Ù…Ù‡Ù†ÙŠ" if lang == "ar" else "Your career coach"
+    coach_name = "مدربك المهني" if lang == "ar" else "Your career coach"
 
     # opening beat of the day, once, before the first mission
     if step == 0 and not st.session_state.awaiting_continue and not st.session_state.turns:
-        brief = ("Ø¨Ø¯Ø£ ÙŠÙˆÙ…Ùƒ. Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ Ø§Ù„Ø­Ù‚ÙŠÙ‚ÙŠØ© Ø³ØªØµÙ„Ùƒ Ø§Ù„Ø¢Ù† â€” Ù‚Ø±Ø§Ø±Ø§ØªÙƒ Ù‡ÙŠ Ø§Ù„ØªÙŠ ØªØ­Ø±Ùƒ Ø§Ù„Ù‚ØµØ©."
+        brief = ("بدأ يومك. الرسائل الحقيقية ستصلك الآن — قراراتك هي التي تحرك القصة."
                  if lang == "ar" else
-                 "Your day begins. Real messages are coming in â€” your decisions drive the story.")
-        _chat_bubble("coach", "Ù…" if lang == "ar" else "C", coach_name, brief)
+                 "Your day begins. Real messages are coming in — your decisions drive the story.")
+        _chat_bubble("coach", "م" if lang == "ar" else "C", coach_name, brief)
 
     # the scenario arrives as an incoming message from the persona
     _chat_bubble("persona", persona[:1], persona, scenario["msg"][lang],
@@ -891,11 +891,11 @@ def page_simulation(data: dict, ui: dict, lang: str) -> None:
             st.info(ui["fallbackNote"])
 
         # the player's decision echoes back as an outgoing message
-        you = "Ø£Ù†Øª" if lang == "ar" else "You"
+        you = "أنت" if lang == "ar" else "You"
         _chat_bubble("user", you[:1], you, turn["decision"])
 
         # what happened in the scene
-        happened = "Ù…Ø§Ø°Ø§ Ø­Ø¯Ø«" if lang == "ar" else "What happened"
+        happened = "ماذا حدث" if lang == "ar" else "What happened"
         st.markdown(
             f"<div class='ct-scene-event'><b class='tag'>{happened}</b><br/>{turn['consequence']}</div>",
             unsafe_allow_html=True,
@@ -907,10 +907,10 @@ def page_simulation(data: dict, ui: dict, lang: str) -> None:
             f"{c[lang]} <b>{turn['scores'].get(c['key'], 0)}</b>/10</span>"
             for i, c in enumerate(p["criteria"])
         )
-        _chat_bubble("coach", "Ù…" if lang == "ar" else "C", coach_name,
+        _chat_bubble("coach", "م" if lang == "ar" else "C", coach_name,
                      f"{turn['feedback']}<div style='margin-top:10px'>{skills_html}</div>")
 
-        nxt = (("Ø§Ù„Ù…Ù‡Ù…Ø© Ø§Ù„ØªØ§Ù„ÙŠØ©" if lang == "ar" else "Next mission")
+        nxt = (("المهمة التالية" if lang == "ar" else "Next mission")
                if step < 2 else ui["finish"])
         st.button(nxt, type="primary", width="stretch", on_click=continue_day)
 
@@ -951,7 +951,7 @@ def _print_button(lang: str) -> None:
     allow printing from a user gesture in the page itself, so this renders a
     real HTML button (in a Streamlit frame) calling window.parent.print().
     The @media print stylesheet hides app controls so only the report prints."""
-    label = "Ø·Ø¨Ø§Ø¹Ø© Ø§Ù„ØªÙ‚Ø±ÙŠØ±" if lang == "ar" else "Print the report"
+    label = "طباعة التقرير" if lang == "ar" else "Print the report"
     direction = "rtl" if lang == "ar" else "ltr"
     html = f"""
 <div style="direction:{direction};text-align:center;margin:0;padding:0">
@@ -996,15 +996,15 @@ def page_report(data: dict, ui: dict, lang: str) -> None:
         f"<div class='ct-accentbar' style='background:{f['accent']}'></div>"
         f"<span class='ct-eyebrow'>{ui['rTitle']}</span>"
         f"<div class='ct-h2'>{ui['indicatorFor']}{p['title'][lang]}</div>"
-        f"<div class='ct-muted'>{f['name'][lang]} Â· {p['title']['en'] if lang == 'ar' else p['title']['ar']}</div>"
-        f"<div class='ct-score-pill' style='margin-top:10px'>{report['pct']}Ùª</div>"
+        f"<div class='ct-muted'>{f['name'][lang]} · {p['title']['en'] if lang == 'ar' else p['title']['ar']}</div>"
+        f"<div class='ct-score-pill' style='margin-top:10px'>{report['pct']}٪</div>"
         f"<div class='ct-band'>{report['band']}</div>",
         large=True,
     )
     st.progress(min(100, max(0, report["pct"])) / 100)
 
     # compact print action right after the summary (renders on the left in
-    # RTL, opposite the summary content) â€” never a full-width bottom button
+    # RTL, opposite the summary content) — never a full-width bottom button
     _, print_col = st.columns([2.9, 1.1])
     with print_col:
         _print_button(lang)
@@ -1081,7 +1081,7 @@ def page_report(data: dict, ui: dict, lang: str) -> None:
         c1, c2, c3 = st.columns([1.6, 1.2, 1.2])
         with c1:
             st.button(
-                "Ø­ÙØ¸ ÙˆØ§Ù„Ø¹ÙˆØ¯Ø© Ù„Ù„ÙˆØ­Ø©" if lang == "ar" else "Save & Return to Dashboard",
+                "حفظ والعودة للوحة" if lang == "ar" else "Save & Return to Dashboard",
                 type="primary", width="stretch",
                 key="report_save_btn",
                 on_click=_save_to_journey,
@@ -1125,7 +1125,7 @@ PAGES = {
     "my_future":        page_my_future,
     "my_progress":      page_my_progress,
     "support":          page_support,
-    # my_coach removed from nav/PAGES â€” coach is floating-only now
+    # my_coach removed from nav/PAGES — coach is floating-only now
 }
 
 # Pages that should NOT show the unified navigation
@@ -1136,7 +1136,7 @@ _JOURNEY_PAGES = {"profile", "fields", "positions", "position_intro", "simulatio
 
 def main() -> None:
     st.set_page_config(
-        page_title="ØªÙˆØ£Ù…Ùƒ Ø§Ù„Ù…Ù‡Ù†ÙŠ â€” CareerTwin AI",
+        page_title="توأمك المهني — CareerTwin AI",
         layout="wide",
         initial_sidebar_state="collapsed",
     )
@@ -1146,7 +1146,7 @@ def main() -> None:
     inject_dashboard_css(lang)
     resolve_app_mode()
 
-    # â”€â”€ Migrate stale navigation state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    # ── Migrate stale navigation state ──────────────────────────────
     # If a previous session had my_coach or experiences as current nav/page,
     # redirect them gracefully to the new equivalents.
     if st.session_state.get("current_nav") in ("my_coach", "experiences"):
@@ -1181,7 +1181,7 @@ def main() -> None:
         import traceback
         traceback.print_exc()
         st.error(
-            "Ø­Ø¯Ø« Ø®Ø·Ø£ ØºÙŠØ± Ù…ØªÙˆÙ‚Ø¹. Ø£Ø¹Ø¯Ù†Ø§Ùƒ Ø¥Ù„Ù‰ Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ù…Ø¬Ø§Ù„Ø§Øª."
+            "حدث خطأ غير متوقع. أعدناك إلى قائمة المجالات."
             if lang == "ar"
             else "Something unexpected happened. We took you back to the fields list."
         )
@@ -1190,4 +1190,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
