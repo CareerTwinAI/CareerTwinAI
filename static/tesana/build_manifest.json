@@ -1,0 +1,16 @@
+{
+  "build_version": "6028b80ea593",
+  "game_name": "game-20260816-32c4bf3b",
+  "built_at": "2026-08-20T08:54:37.011973",
+  "files": {
+    "index.pck": {
+      "size": 153126384
+    },
+    "index.wasm": {
+      "size": 37685705
+    },
+    "index.js": {
+      "size": 315759
+    }
+  }
+}
