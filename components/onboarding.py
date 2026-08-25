@@ -409,21 +409,15 @@ def _step_register(lang: str) -> None:
 
 
 
-    if not is_login:
+    name = st.text_input(
 
-        name = st.text_input(
+        "الاسم" if lang == "ar" else "Name",
 
-            "الاسم" if lang == "ar" else "Name",
+        placeholder="محمد العامري" if lang == "ar" else "John Smith",
 
-            placeholder="محمد العامري" if lang == "ar" else "John Smith",
+        key="ob_name",
 
-            key="ob_name",
-
-        )
-
-    else:
-
-        name = "طالب" if lang == "ar" else "Student"
+    )
 
 
 
