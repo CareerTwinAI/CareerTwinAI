@@ -55,6 +55,40 @@ html, body, .stApp {{
   letter-spacing: normal !important;
 }}
 section.main > div {{ direction: {direction}; }}
+/* Full language-direction support */
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"],
+.block-container {{
+  direction: {direction} !important;
+  text-align: {text_align} !important;
+}}
+
+[data-testid="stTextInput"] input,
+[data-testid="stTextArea"] textarea,
+[data-testid="stSelectbox"] div[data-baseweb="select"],
+[data-testid="stMultiSelect"] div[data-baseweb="select"],
+[data-baseweb="popover"],
+[data-baseweb="menu"] {{
+  direction: {direction} !important;
+  text-align: {text_align} !important;
+}}
+
+[data-testid="stTextInput"] label,
+[data-testid="stTextArea"] label,
+[data-testid="stSelectbox"] label,
+[data-testid="stMultiSelect"] label {{
+  direction: {direction} !important;
+  text-align: {text_align} !important;
+}}
+
+.ct-dash-welcome,
+.ct-dash-metrics,
+.ct-card,
+.ct-profile-header,
+.ct-profile-section {{
+  direction: {direction} !important;
+  text-align: {text_align} !important;
+}}
 .block-container {{
   direction: {direction};
   text-align: {text_align};
