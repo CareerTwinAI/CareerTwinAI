@@ -309,7 +309,12 @@ def header(ui: dict) -> None:
     lang    = st.session_state.language
     live    = st.session_state.app_mode == "live"
     on_home = st.session_state.current_page in ("landing", "welcome", "dashboard")
-
+def _logout():
+    current_lang = st.session_state.get("language", "ar")
+    st.session_state.clear()
+    st.session_state.language = current_lang
+    st.session_state.current_page = "welcome"
+    st.session_state.onboarding_complete = False
     badge = ""
     if live:
         badge_text = "المحاكاة الذكية مفعّلة" if lang == "ar" else "Smart simulation enabled"
@@ -324,7 +329,10 @@ def header(ui: dict) -> None:
 
     # ── layout: brand | badge | [home] | lang-AR | lang-EN ──
     # Wider columns so buttons always have room — fixes vertical text root cause
-    c1, c2, c3, c_ar, c_en = st.columns([3.8, 2.0, 1.4, 1.1, 1.1], vertical_alignment="center")
+    c1, c2, c3, c_logout, c_ar, c_en = st.columns(
+        [3.4, 1.6, 1.2, 1.3, 1.1, 1.1],
+        vertical_alignment="center"
+    )
 
     with c1:
         st.markdown(
@@ -355,6 +363,18 @@ def header(ui: dict) -> None:
     # Two language buttons — same size, always visible
     ar_type = "primary" if lang == "ar" else "secondary"
     en_type = "primary" if lang == "en" else "secondary"
+
+
+
+    with c_logout:
+        if st.session_state.get("onboarding_complete"):
+            st.button(
+                "تسجيل الخروج" if lang == "ar" else "Logout",
+                key="logout_btn",
+                use_container_width=True,
+                on_click=_logout,
+            )
+
 
     with c_ar:
         if st.button("العربية", key="lang_ar_btn", type=ar_type, use_container_width=True):

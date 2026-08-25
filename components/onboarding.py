@@ -409,15 +409,21 @@ def _step_register(lang: str) -> None:
 
 
 
-    name = st.text_input(
+    if not is_login:
 
-        "الاسم" if lang == "ar" else "Name",
+        name = st.text_input(
 
-        placeholder="محمد العامري" if lang == "ar" else "John Smith",
+            "الاسم" if lang == "ar" else "Name",
 
-        key="ob_name",
+            placeholder="محمد العامري" if lang == "ar" else "John Smith",
 
-    )
+            key="ob_name",
+
+        )
+
+    else:
+
+        name = ""
 
 
 
@@ -448,28 +454,28 @@ def _step_register(lang: str) -> None:
     st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
 
 
+def _submit():
 
-    def _submit():
+    existing_profile = st.session_state.get("student_profile", {})
 
-        display_name = (name or "").strip() or ("طالب" if lang == "ar" else "Student")
+    if is_login:
+        display_name = existing_profile.get("name", "")
+        if not display_name:
+            display_name = (email or "").split("@")[0].replace(".", " ").replace("_", " ").title()
+    else:
+        display_name = (name or "").strip()
 
-        st.session_state.student_profile = {
+    st.session_state.student_profile = {
+        **existing_profile,
+        "name": display_name,
+        "email": (email or "").strip(),
+        "education_stage": existing_profile.get("education_stage", ""),
+        "emirate": existing_profile.get("emirate", ""),
+        "interests": existing_profile.get("interests", []),
+    }
 
-            "name": display_name,
+    st.session_state.onboarding_step = 2
 
-            "email": (email or "").strip(),
-
-            # profile details filled later in إكمال الملف التعريفي
-
-            "education_stage": "",
-
-            "emirate": "",
-
-            "interests": [],
-
-        }
-
-        st.session_state.onboarding_step = 2
 
 
 
