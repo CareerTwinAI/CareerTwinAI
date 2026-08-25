@@ -372,7 +372,7 @@ h1, h2, h3, h4, h5, p, li, label, span, div {{ color: {COLORS['ink']}; }}
   margin: 10px 0 2px;
 }}
 /* choice chips: make simulation pills feel like game choices */
-.st-key-sim_choices div[data-testid="stPills"] button {
+.st-key-sim_choices div[data-testid="stPills"] button {{
   border-radius: 16px !important;
   padding: 12px 18px !important;
   font-size: 14px !important;
@@ -381,16 +381,16 @@ h1, h2, h3, h4, h5, p, li, label, span, div {{ color: {COLORS['ink']}; }}
   background: #FFFFFF !important;
   border: 1.5px solid #D9E3F0 !important;
   color: #0B1B33 !important;
-}
+}}
 
-.st-key-sim_choices div[data-testid="stPills"] button * {
+.st-key-sim_choices div[data-testid="stPills"] button * {{
   color: #0B1B33 !important;
-}
+}}
 
-.st-key-sim_choices div[data-testid="stPills"] button:hover {
+.st-key-sim_choices div[data-testid="stPills"] button:hover {{
   background: #F6F9FD !important;
   border-color: #2563EB !important;
-}
+}}
 /* ---------- header status badge (non-interactive) ---------- */
 .ct-status {{
   display: inline-flex;
