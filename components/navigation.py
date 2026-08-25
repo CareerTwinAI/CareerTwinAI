@@ -39,8 +39,8 @@ def _logout() -> None:
 def render_navigation(lang: str) -> None:
     direction = "rtl" if lang == "ar" else "ltr"
     align = "right" if lang == "ar" else "left"
-    logout_left = "max(20px, calc((100vw - 1080px) / 2 - 90px))" if lang == "en" else "auto"
-    logout_right = "auto" if lang == "en" else "max(20px, calc((100vw - 1080px) / 2 - 90px))"
+    logout_left = "24px" if lang == "en" else "auto"
+    logout_right = "auto" if lang == "en" else "24px"
     st.markdown(
         f"""
 <style>
@@ -71,6 +71,7 @@ def render_navigation(lang: str) -> None:
 }}
 .stButton button, .stButton button * {{ direction: {direction} !important; }}
 
+/* Logout is pinned to the outer edge: left in English, right in Arabic. */
 .st-key-nav_logout {{
     position: fixed !important;
     top: 50px !important;
