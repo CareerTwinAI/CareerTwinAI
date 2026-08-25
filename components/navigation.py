@@ -4,20 +4,17 @@
 import streamlit as st
 
 _NAV = [
-    ("dashboard",        "الرئيسية",        "Home",           "dashboard"),
-    ("complete_profile", None,              None,             "complete_profile"),
-    ("fields",           "المجالات",        "Career Fields",  "fields"),
-    ("my_progress",      "تقدّمي",          "My Progress",    "my_progress"),
-    ("my_future",        "مستقبلي",         "My Future",      "my_future"),
-    ("support",          "الدعم",           "Support",        "support"),
+    ("dashboard", "الرئيسية", "Home", "dashboard"),
+    ("complete_profile", None, None, "complete_profile"),
+    ("fields", "المجالات", "Career Fields", "fields"),
+    ("my_progress", "تقدّمي", "My Progress", "my_progress"),
+    ("my_future", "مستقبلي", "My Future", "my_future"),
+    ("support", "الدعم", "Support", "support"),
 ]
 
 
 def _profile_label(lang: str) -> str:
-    profile = st.session_state.get("student_profile", {})
-    if profile.get("education_stage"):
-        return "ملفي التعريفي" if lang == "ar" else "My Profile"
-    return "الملف التعريفي" if lang == "ar" else "My Profile"
+    return "ملفي التعريفي" if lang == "ar" else "My Profile"
 
 
 def _logout() -> None:
@@ -39,8 +36,6 @@ def _logout() -> None:
 def render_navigation(lang: str) -> None:
     direction = "rtl" if lang == "ar" else "ltr"
     align = "right" if lang == "ar" else "left"
-    logout_left = "24px" if lang == "en" else "auto"
-    logout_right = "auto" if lang == "en" else "24px"
     st.markdown(
         f"""
 <style>
@@ -62,52 +57,31 @@ def render_navigation(lang: str) -> None:
     text-align: {align} !important;
 }}
 .ct-dash-welcome, .ct-dash-welcome *, .ct-dash-metrics, .ct-dash-metrics *,
-.ct-card, .ct-card *, .ct-card-lg, .ct-card-lg *,
-.ct-profile-header, .ct-profile-header *, .ct-profile-section, .ct-profile-section *,
-.ct-dash-roadmap, .ct-dash-roadmap *, .ct-future-card, .ct-future-card *,
-.ct-progress-card, .ct-progress-card *, .ct-support-card, .ct-support-card * {{
+.ct-card, .ct-card *, .ct-card-lg, .ct-card-lg *, .ct-profile-header, .ct-profile-header *,
+.ct-profile-section, .ct-profile-section *, .ct-dash-roadmap, .ct-dash-roadmap *,
+.ct-future-card, .ct-future-card *, .ct-progress-card, .ct-progress-card *,
+.ct-support-card, .ct-support-card * {{
     direction: {direction} !important;
     text-align: {align} !important;
-}}
-.stButton button, .stButton button * {{ direction: {direction} !important; }}
-
-/* Logout is pinned to the outer edge: left in English, right in Arabic. */
-.st-key-nav_logout {{
-    position: fixed !important;
-    top: 50px !important;
-    left: {logout_left} !important;
-    right: {logout_right} !important;
-    width: 150px !important;
-    z-index: 1000 !important;
-}}
-.st-key-nav_logout button {{
-    width: 100% !important;
-    min-height: 40px !important;
-    border: 1px solid #E3EAF4 !important;
-    background: #FFFFFF !important;
-    border-radius: 12px !important;
-    box-shadow: 0 1px 2px rgba(11,27,51,.05) !important;
-    padding-inline: 12px !important;
-}}
-.st-key-nav_logout button p {{
-    color: #33456A !important;
-    font-weight: 700 !important;
-    white-space: nowrap !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-}}
-@media (max-width: 900px) {{
-    .st-key-nav_logout {{
-        top: 44px !important;
-        left: {"12px" if lang == "en" else "auto"} !important;
-        right: {"auto" if lang == "en" else "12px"} !important;
-        width: 132px !important;
-    }}
 }}
 </style>
 """,
         unsafe_allow_html=True,
     )
+
+    # Real Streamlit column placement (no position:fixed): English logout is
+    # physically in the left-most column; Arabic logout is in the right-most.
+    action_cols = st.columns([1.25, 5.5, 1.25])
+    logout_col = action_cols[0] if lang == "en" else action_cols[2]
+    with logout_col:
+        if st.button(
+            "Logout" if lang == "en" else "تسجيل الخروج",
+            key=f"nav_logout_{lang}",
+            type="secondary",
+            use_container_width=True,
+        ):
+            _logout()
+            st.rerun()
 
     current = st.session_state.get("current_nav", "dashboard")
     cols = st.columns([1.0, 1.4, 1.1, 1.0, 1.0, 0.8])
@@ -119,7 +93,3 @@ def render_navigation(lang: str) -> None:
                 st.session_state.current_nav = key
                 st.session_state.current_page = page_target
                 st.rerun()
-
-    if st.button("تسجيل الخروج" if lang == "ar" else "Logout", key="nav_logout", type="tertiary"):
-        _logout()
-        st.rerun()
